@@ -1,0 +1,19 @@
+name: AirPassengers ML Pipeline
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-train:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t airpassengers-mlflow .
+
+      - name: Run training container
+        run: docker run airpassengers-mlflow
